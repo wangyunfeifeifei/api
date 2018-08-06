@@ -14,3 +14,5 @@ node app.js
 + `/api/music/getDiscList` 获取歌单列表
 + `/api/music/getSingerDetail` 获取歌手信息
 + `/api/music/getSongLyric` 获取歌词
++ `/api/music/getDiscDetail` 获取歌单详情
++ `/api/music/getTopList` 获取排行榜信息
