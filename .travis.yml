@@ -12,4 +12,4 @@ after_success:
   - npm prune --production # 删除devDependencies
   - tar -jcf api-server.tar.bz2 * # 打包并压缩代码
   - scp api-server.tar.bz2 root@www.wangyf.cn:~/ # 复制到阿里云服务器
-  - ssh root@www.wangyf.cn 'mkdir -p api-server && tar -jxf api-server.tar.bz2 -C api-server'
+  - ssh root@www.wangyf.cn 'mkdir -p api-server && tar -jxf api-server.tar.bz2 -C api-server && rm api-server.tar.bz2'
