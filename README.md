@@ -7,7 +7,7 @@ npm install
 启动服务
 node app.js
 ```
-## 部分pai示例
+## 部分api示例
 ### qq音乐api
 + `/api/music/getRecommend` 获取推荐页轮播图
 + `/api/music/getSingerList` 获取歌手列表
