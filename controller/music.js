@@ -158,6 +158,28 @@ class MusicController {
         return res.text
       })
   }
+  // 获取榜单详情
+  async getTopListDetail(ctx) {
+    const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg'
+    const data = Object.assign({}, commonParams, {
+      g_tk: 5381,
+      uin: 0,
+      format: 'json',
+      notice: 0,
+      platform: 'h5',
+      needNewCode: 1,
+      tpl: 3,
+      page: 'detail',
+      type: 'top',
+      topid: ctx.query.topid,
+      _: 1533709115469
+    })
+    ctx.body = await request.get(url)
+      .query(data)
+      .then(res => {
+        return res.text
+      })
+  }
 }
 
 module.exports = new MusicController()
