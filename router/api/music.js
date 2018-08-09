@@ -34,4 +34,12 @@ music.get('/getTopListDetail', async (ctx) => {
   await musicController.getTopListDetail(ctx)
 })
 
+music.get('/getAlbumlib', async (ctx) => {
+  await musicController.getAlbumlib(ctx)
+})
+
+music.get('/getAlbumInfo', async (ctx) => {
+  await musicController.getAlbumInfo(ctx)
+})
+
 module.exports = music

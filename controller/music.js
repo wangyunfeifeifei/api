@@ -180,6 +180,44 @@ class MusicController {
         return res.text
       })
   }
+  // 获取专辑列表
+  async getAlbumlib(ctx) {
+    const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+    const data = Object.assign({}, commonParams, {
+      gtk: 668456545,
+      hostUin: 0,
+      loginUin: 981525928,
+      format: 'jsonp',
+      notice: 0,
+      platform: 'yqq',
+      needNewCode: 0,
+      data: '{"albumlib":{"method":"get_album_by_tags","param":{"area":7,"company":-1,"genre":-1,"type":-1,"year":-1,"sort":2,"get_tags":1,"sin":0,"num":100,"click_albumid":0},"module":"music.web_album_library"}}'
+    })
+    ctx.body = await request.get(url)
+      .query(data)
+      .then(res => {
+        return res.text
+      })
+  }
+  // 获取专辑信息
+  async getAlbumInfo(ctx) {
+    const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg'
+    const data = Object.assign({}, commonParams, {
+      albummid: ctx.query.mid,
+      g_tk: 668456545,
+      loginUin: 981525928,
+      hostUin: 0,
+      format: 'json',
+      notice: 0,
+      platform: 'yqq',
+      needNewCode: 0
+    })
+    ctx.body = await request.get(url)
+      .query(data)
+      .then(res => {
+        return res.text
+      })
+  }
 }
 
 module.exports = new MusicController()
