@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/wangyunfeifeifei/api#readme",
   "dependencies": {
+    "async": "^2.6.1",
     "chalk": "^2.4.1",
     "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "superagent": "^3.8.3"
   }

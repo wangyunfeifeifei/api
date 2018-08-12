@@ -2,6 +2,8 @@ const {
   commonParams
 } = require('./config')
 const request = require('superagent')
+const async = require('async')
+const {promisify} = require('util')
 
 class MusicController {
   constructor() {}
@@ -217,6 +219,56 @@ class MusicController {
       .then(res => {
         return res.text
       })
+  }
+  // 获取vkey
+  async getPUrl(ctx) {
+    const url = `https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg`
+    
+    const {body} = ctx.request
+
+    const data = Object.assign({}, commonParams, {
+      g_tk: 668456545,
+      jsonpCallback: 'MusicJsonCallback28582493156592403',
+      hostUin: 0,
+      format: 'json',
+      notice: 0,
+      platform: 'yqq',
+      needNewCode: 0,
+      cid: 205361747,
+      callback: 'MusicJsonCallback28582493156592403',
+      uin: 981525928,
+      songmid: '',
+      filename: '',
+      guid: body.uid
+    })
+
+    let mapLimit = promisify(async.mapLimit)
+
+    // 用async库并发获取vkey
+    ctx.body = await mapLimit(body.mids, 5, function (mid, callback) {
+      data.songmid = mid
+      data.filename = `C400${mid}.m4a`
+      request.get(url)
+      .set({
+        referer: 'https://y.qq.com/',
+        origin: 'https://y.qq.com'
+      })
+      .query(data)
+      .buffer(true)
+      .then(res => {
+        callback(null, res.body)
+      })
+    }).then(result => {
+      let reg = /^\w+\(({[^()]+})\)$/
+      let retArray = result.map(item => {
+        return reg.exec(item.toString()) ? JSON.parse(reg.exec(item.toString())[1]) : {}
+      })
+      let urls = []
+      retArray.forEach((item, index) => {
+        urls.push(`http://dl.stream.qqmusic.qq.com/${item.data.items[0].filename}?vkey=${item.data.items[0].vkey}&guid=${body.uid}&uin=981525928&fromtag=66`)
+      })
+      return urls
+    })
   }
 }
 

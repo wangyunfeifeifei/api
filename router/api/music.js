@@ -42,4 +42,8 @@ music.get('/getAlbumInfo', async (ctx) => {
   await musicController.getAlbumInfo(ctx)
 })
 
+music.post('/getPUrl', async (ctx) => {
+  await musicController.getPUrl(ctx)
+})
+
 module.exports = music
