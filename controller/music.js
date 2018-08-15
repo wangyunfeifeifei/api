@@ -270,6 +270,28 @@ class MusicController {
       return urls
     })
   }
+
+  async getSearchResult(ctx) {
+    const url = 'https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg'
+    const data = Object.assign({}, commonParams, {
+      g_tk: 668456545,
+      is_xml: 0,
+      format: 'json',
+      key: ctx.query.key,
+      jsonpCallback: 'SmartboxKeysCallbackmod_top_search1292',
+      loginUin: 981525928,
+      hostUin: 0,
+      notice: 0,
+      platform: 'yqq',
+      needNewCode: 0
+    })
+    ctx.body = await request.get(url)
+      .query(data)
+      .set('referer', 'https://y.qq.com')
+      .then(res => {
+        return res.text
+      })
+  }
 }
 
 module.exports = new MusicController()
