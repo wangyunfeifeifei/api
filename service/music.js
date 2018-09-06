@@ -292,6 +292,24 @@ class MusicController {
         return res.text
       })
   }
+
+  async getHotKey(ctx) {
+    const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
+    const data = Object.assign({}, commonParams, {
+      g_tk: 5381,
+      uin: 0,
+      format: 'json',
+      notice: 0,
+      platform: 'h5',
+      needNewCode: 1,
+      _: 1536276564427
+    })
+    ctx.body = await request.get(url)
+      .query(data)
+      .then(res => {
+        return res.text
+      })
+  }
 }
 
 module.exports = new MusicController()

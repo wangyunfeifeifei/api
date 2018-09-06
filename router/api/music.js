@@ -1,53 +1,57 @@
 const Router = require('koa-router')
 
 const music = new Router()
-const musicController = require('../../controller/music')
+const musicService = require('../../service/music')
 music.get('/getRecommend', async (ctx) => {
-  await musicController.getRecommend(ctx)
+  await musicService.getRecommend(ctx)
 })
 
 music.get('/getSingerList', async (ctx) => {
-  await musicController.getSingerList(ctx)
+  await musicService.getSingerList(ctx)
 })
 
 music.get('/getDiscList', async (ctx) => {
-  await musicController.getDiscList(ctx)
+  await musicService.getDiscList(ctx)
 })
 
 music.get('/getSingerDetail', async (ctx) => {
-  await musicController.getSingerDetail(ctx)
+  await musicService.getSingerDetail(ctx)
 })
 
 music.get('/getSongLyric', async (ctx) => {
-  await musicController.getLyric(ctx)
+  await musicService.getLyric(ctx)
 })
 
 music.get('/getDiscDetail', async (ctx) => {
-  await musicController.getDiscDetail(ctx)
+  await musicService.getDiscDetail(ctx)
 })
 
 music.get('/getTopList', async (ctx) => {
-  await musicController.getTopList(ctx)
+  await musicService.getTopList(ctx)
 })
 
 music.get('/getTopListDetail', async (ctx) => {
-  await musicController.getTopListDetail(ctx)
+  await musicService.getTopListDetail(ctx)
 })
 
 music.get('/getAlbumlib', async (ctx) => {
-  await musicController.getAlbumlib(ctx)
+  await musicService.getAlbumlib(ctx)
 })
 
 music.get('/getAlbumInfo', async (ctx) => {
-  await musicController.getAlbumInfo(ctx)
+  await musicService.getAlbumInfo(ctx)
 })
 
 music.post('/getPUrl', async (ctx) => {
-  await musicController.getPUrl(ctx)
+  await musicService.getPUrl(ctx)
 })
 
 music.get('/getSearchResult', async (ctx) => {
-  await musicController.getSearchResult(ctx)
+  await musicService.getSearchResult(ctx)
+})
+
+music.get('/getHotKey', async (ctx) => {
+  await musicService.getHotKey(ctx)
 })
 
 module.exports = music
